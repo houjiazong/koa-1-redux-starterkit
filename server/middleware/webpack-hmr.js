@@ -12,8 +12,8 @@ module.exports = function (compiler, opts) {
   return function* (next) {
     var hasNext = yield applyExpressMiddleware(middleware, this.req, this.res)
 
-    if (hasNext && next && typeof next === "function") {
-      next()
+    if (hasNext && next) {
+      yield next
     }
   }
 }

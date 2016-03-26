@@ -37,6 +37,23 @@ webpackConfig.output = {
   publicPath: config.compiler_public_path
 }
 
+
+// ------------------------------------
+// Plugins
+// ------------------------------------
+webpackConfig.plugins = [
+  new webpack.DefinePlugin(config.globals),
+  new HtmlWebpackPlugin({
+    template: paths.views('index.hbs'),
+    hash: false,
+    filename: 'index.html',
+    inject: 'body',
+    minify: {
+      collapseWhitespace: true
+    }
+  })
+]
+
 if (__DEV__) {
   log('Enable plugins for live development (HMR, NoErrors).')
   webpackConfig.plugins.push(
@@ -87,21 +104,6 @@ webpackConfig.module.loaders.push({
   loader: "handlebars"
 });
 
-// ------------------------------------
-// Plugins
-// ------------------------------------
-webpackConfig.plugins = [
-  new webpack.DefinePlugin(config.globals),
-  new HtmlWebpackPlugin({
-    template: paths.views('index.hbs'),
-    hash: false,
-    filename: 'index.html',
-    inject: 'body',
-    minify: {
-      collapseWhitespace: true
-    }
-  })
-]
 
 
 // ------------------------------------

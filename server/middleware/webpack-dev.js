@@ -13,6 +13,7 @@ module.exports = function (compiler, publicPath) {
     publicPath: publicPath,
     contentBase: paths.client(),
     hot: true,
+    inline: true,
     quiet: config.compiler_quiet,
     noInfo: config.compiler_quiet,
     lazy: false,
@@ -30,7 +31,7 @@ module.exports = function (compiler, publicPath) {
     });
 
     if (nextStep && next) {
-      yield* next;
+      yield next;
     }
   }
 }

@@ -1,3 +1,5 @@
+const fs = require("fs");
+const config = require("../../config");
 const Router = require("koa-router")
 const Handlebars = require("handlebars");
 
@@ -7,14 +9,18 @@ module.exports = function(app) {
   // register json helper
   Handlebars.registerHelper('json', (obj) => JSON.stringify(obj) )
 
-  router
+  const react = function( next ) {
+    this.redirect("/index.html");
+  }
 
-  .get("/", function *(next) {
-      yield this.render("index", {
+  router
+    .get("/", react, function *(next) {
+      yield this.render("../dist/index", {
         data: {
           user: "..."
         }
       });
+
     })
 
     .post("/", function *(next) {

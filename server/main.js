@@ -22,9 +22,8 @@ if (config.proxy && config.proxy.enabled) {
 // Create views
 app.use(views(paths.views(), {
   map: {
-    'hbs': 'handlebars'
-  },
-  extension: 'hbs'
+    'html': 'handlebars'
+  }
 }))
 
 app.use(bodyParser())
