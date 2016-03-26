@@ -9,8 +9,7 @@ module.exports = function(app) {
 
   router
 
-    .get("/", function *(next) {
-      console.log(this.req.path);
+  .get("/", function *(next) {
       yield this.render("index", {
         data: {
           user: "..."

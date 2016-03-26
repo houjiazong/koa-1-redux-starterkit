@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const config = require("./config")
 const cssnano = require("cssnano")
 const debug = require("debug")
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const log = debug("app:webpack:config")
 const paths = config.paths
@@ -37,7 +38,7 @@ webpackConfig.output = {
 }
 
 if (__DEV__) {
-  debug('Enable plugins for live development (HMR, NoErrors).')
+  log('Enable plugins for live development (HMR, NoErrors).')
   webpackConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
@@ -80,6 +81,28 @@ webpackConfig.module.loaders = [{
   test: /\.json$/,
   loader: 'json'
 }]
+
+webpackConfig.module.loaders.push({
+  test: /\.hbs$/,
+  loader: "handlebars"
+});
+
+// ------------------------------------
+// Plugins
+// ------------------------------------
+webpackConfig.plugins = [
+  new webpack.DefinePlugin(config.globals),
+  new HtmlWebpackPlugin({
+    template: paths.views('index.hbs'),
+    hash: false,
+    filename: 'index.html',
+    inject: 'body',
+    minify: {
+      collapseWhitespace: true
+    }
+  })
+]
+
 
 // ------------------------------------
 // Style Loaders

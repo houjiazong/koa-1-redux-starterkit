@@ -20,13 +20,12 @@ module.exports = function (compiler, publicPath) {
   })
 
   return function* (next) {
-    var self = this;
-    console.log(this.req.path);
+    var ctx = this;
 
-    var nextStep = yield applyExpressMiddleware(middleware, this.req,  {
-      end: (content) => (self.body = content),
+    var nextStep = yield applyExpressMiddleware(middleware, ctx.req,  {
+      end: (content) => (ctx.body = content),
       setHeader: function () {
-        self.set.apply(ctx, arguments)
+        ctx.set.apply(ctx, arguments)
       }
     });
 
