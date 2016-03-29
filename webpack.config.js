@@ -44,7 +44,7 @@ webpackConfig.output = {
 webpackConfig.plugins = [
   new webpack.DefinePlugin(config.globals),
   new HtmlWebpackPlugin({
-    template: paths.views('index.hbs'),
+    template: paths.base('views', 'index.hbs'),
     hash: false,
     filename: 'index.html',
     inject: 'body',
