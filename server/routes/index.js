@@ -9,23 +9,13 @@ module.exports = function(app) {
   // register json helper
   Handlebars.registerHelper('json', (obj) => JSON.stringify(obj) )
 
-  const react = function( next ) {
-    this.redirect("/index.html");
+  const react = function *( next ) {
+    this.req.url = "/index.html"
+    yield next
   }
 
   router
-    .get("/", react, function *(next) {
-      yield this.render("../dist/index", {
-        data: {
-          user: "..."
-        }
-      });
-
-    })
-
-    .post("/", function *(next) {
-      this.body = "Post's requests work too!"
-    })
+    .get("/",  react)
 
   app.use(router.routes())
   app.use(router.allowedMethods())

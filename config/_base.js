@@ -54,8 +54,7 @@ config.paths = (() => {
   return {
     base   : base,
     client : base.bind(resolve, config.dir_client),
-    dist   : base.bind(resolve, config.dir_dist),
-    views  : base.bind(resolve, config.dir_views)
+    dist   : base.bind(resolve, config.dir_dist)
   }
 
 })();

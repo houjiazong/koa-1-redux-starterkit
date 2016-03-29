@@ -33,7 +33,7 @@ webpackConfig.entry = {
 
 webpackConfig.output = {
   filename: `[name].[${config.compiler_hash_type}].js`,
-  path: paths.base(config.dir_dist),
+  path: paths.dist("static"),
   publicPath: config.compiler_public_path
 }
 
@@ -98,12 +98,6 @@ webpackConfig.module.loaders = [{
   test: /\.json$/,
   loader: 'json'
 }]
-
-webpackConfig.module.loaders.push({
-  test: /\.hbs$/,
-  loader: "handlebars"
-});
-
 
 
 // ------------------------------------
